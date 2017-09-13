@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TestApplication</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<a href="/">Home</a>
+<a href="/phrases/new">Add a phrase</a>
+
+<% if flash[:danger] != nil %>
+  <div class="error" <%= flash[:danger] %> </div>
+<% end %>
+
+<% if flash[:success] != nil %>
+  <div class="info" <%= flash[:success] %> </div>
+<% end %>
+
+<%= yield %>
+
+</body>
+</html>

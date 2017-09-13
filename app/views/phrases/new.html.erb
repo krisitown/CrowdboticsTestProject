@@ -1,0 +1,8 @@
+<h3>Add phrase</h3>
+
+<%= form_for @phrase do |f| %>
+    <%= f.label :content %>
+    <%= f.text_field :content %>
+    
+    <%= f.submit 'Submit' %>
+<% end %>

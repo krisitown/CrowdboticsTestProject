@@ -1,0 +1,44 @@
+<h1>Home</h1>
+
+<h3>Phrases:</h3>
+
+<div id="phrasesBox"></div>
+
+<script>
+$(document).ready(function(){
+     var phrasesPerPage = 5; //default value
+     var phrases = [];
+     var phrasesOnThisPage = [];
+    
+    //getting all the phrases
+    for(var i = 0; i < phrasesPerPage; i++){
+        var phrasesIds = []; //used to check for duplicates
+        //fetch a phrase
+        var currentPhrase = null;
+        $.ajax({
+            url: '/random',
+            method: 'get',
+            success: function(data){
+                //check for duplicates
+                if($.inArray(data.id, phrasesIds)){
+                    //add phrase to array
+                    phrasesOnThisPage.push(data); 
+                    phrasesIds.push(data.id);
+                    $("#phrasesBox").append("<div>" + data.content + "</br></div>");
+                } else {
+                    //rollback index and try if duplicate
+                    i--;
+                }
+            }
+        });
+    }
+       
+    //add all of this page's phrases to whole array
+    phrases.push(phrasesOnThisPage);
+    //save phrases in local storage in order to persist data after reload
+    localStorage.setItem("phrases", phrases);   
+    
+
+});
+
+</script>
